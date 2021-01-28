@@ -36,8 +36,8 @@ def register(): # admin registers are closed, no outside user can be an admin
     r_credentials = [r_username, r_password]
 
     registered_users.append(r_credentials)
-    print("Successfully registered! Now please log in :)")
-    user_prompt
+    print("Successfully registered! Now please log in :)\n")
+    user_prompt()
     return 
 
 # USER PROMPT METHOD (Log in or register)
