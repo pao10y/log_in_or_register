@@ -77,13 +77,16 @@ def main():
     while True:
         print("Sales Inventory System")
 
-        user_input = input("(1) Log-In or (2) Register (Enter #): ")
+        user_input = input("(1) Log-In or (2) Register, (3) to exit (Enter #): ")
 
         if user_input.isdigit():
             if int(user_input) == 1:
                 admin_or_user = log_in()
             elif int(user_input) == 2:
                 admin_or_user = register()
+            elif int(user_input) == 3:
+                print("Program Terminated\n")
+                break
             else:
                 print("Invalid input. Please try again :(\n")
                 continue
