@@ -1,32 +1,27 @@
 def delete_product():
     verify = 0
     resp = resp1 = "y"
-    prod_id = prod_name = category = stocks = price = " "
 
-    while resp1 == "y":
+    prodList()  # print list function
 
-        print("\n\n_______________________________________________________________________________________________\n")
-        for item in products:
-            print(item[0], " " * (15 - len(item[0])), item[1], " " * (35 - len(item[1])), item[2],
-                  " " * (15 - len(item[2])), item[3], " " * (10 - len(item[3])), item[4], " " * (10 - len(item[4])))
-        print("\n_______________________________________________________________________________________________")
-
+    while True:
         prodDel = input("\n\tEnter Product ID: ")
         for item in products:
             if prodDel.lower() == item[0].lower():
-                prod_id = item[0]
-                prod_name = item[1]
-                category = item[2]
-                stocks = item[3]
-                price = item[4]
+                products.remove(item)
                 verify = 1
-        product_details = [prod_id, prod_name, category, stocks, price]
-
         if verify == 1:
+            prodList()  # print list function
             print("\t\tProduct deleted...")
-            products.remove(product_details)
+            verify = 0
         else:
             print("\t\tProduct not found...")
 
         resp = input("\n\tDelete another product [Y/N]: ")
-        resp1 = resp[0].lower()
+        if resp.lower() == "y":
+            continue
+        elif resp.lower() == "n":
+            break
+        else:
+            print("\tInvalid choice, defaulting to N")
+            break
