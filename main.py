@@ -1,4 +1,4 @@
-nestedList=[["PRODUCT ID", "PRODUCT NAME","CATEGORY", "STOCKS", "PRICE"],
+products=[["PRODUCT ID", "PRODUCT NAME","CATEGORY", "STOCKS", "PRICE"],
             ["S0001","WH-CH510 Wireless Headphone","Headphones","10","2,999.00"],
             ["S0002","MDR-XB55AP EXTRA BASS","Headphones","3","1,499.00"],
             ["S0003","XB550AP EXTRA BASS","Headphones","8","2,999.00"],
@@ -71,6 +71,19 @@ def register(): # admin registers are closed, no outside user can be an admin
     print("Successfully registered! Now please log in :)")
     return 3
 
+#SHOW PRODUCTS FUNCTION
+def listProd():
+    l = [0,0,0,0,0]
+    for lists in products:
+        for i in range(5):
+            if l[i] < len(lists[i]):
+                l[i] = len(lists[i])
+    print("\n__________________________________________________________________________________________\n")
+    for item in products:
+        for i in range(5):
+            print(item[i], end=(" "*((l[i]+5) - len(item[i]))) )
+        print()
+    print("\n__________________________________________________________________________________________\n")
 
 # MAIN FUNCTION
 def main():
