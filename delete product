@@ -1,6 +1,6 @@
 def delete_product():
     verify = 0
-    resp = resp1 = "y"
+    resp = "y"
 
     prodList()  # print list function
 
