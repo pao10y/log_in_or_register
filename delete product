@@ -8,7 +8,7 @@ def delete_product():
         print("\n\n_______________________________________________________________________________________________\n")
         for item in products:
             print(item[0], " " * (15 - len(item[0])), item[1], " " * (35 - len(item[1])), item[2],
-                  " " * (15 - len(item[2])), item[3], " " * (10 - len(item[3])), item[4], " " * (10 - len(item[4])), )
+                  " " * (15 - len(item[2])), item[3], " " * (10 - len(item[3])), item[4], " " * (10 - len(item[4])))
         print("\n_______________________________________________________________________________________________")
 
         prodDel = input("\n\tEnter Product ID: ")
