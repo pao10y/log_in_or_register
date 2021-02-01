@@ -165,23 +165,30 @@ def update_product():
     listProd()  # print list function
 
     while True:
-        loc = input("Enter Product ID: ")
-        for i in products:
-            if i[0].lower() == loc.lower():
-                print("Updating Product: ", i)
-                i[1] = input("Enter Product Name: ")
-                i[2] = input("Enter Category: ")         
-                i[3] = int(input("Enter Stocks: "))
-                i[4] = int(input("Enter Price: "))
-                verify = 1
-                break
-        if verify == 1:
-            listProd()  # print list function
-            print("\t\tProduct Updated...")
-            verify = 0
-        else:
-            print("\t\tProduct Not Found...")
-
+        try:
+            loc = input("Enter Product ID: ")
+            for i in products:
+                if i[0].lower() == loc.lower():
+                    print("Updating Product: ", i)
+                    x = i[0]
+                    a = input("Enter Product Name: ")
+                    b = input("Enter Category: ")         
+                    c = int(input("Enter Stocks: "))
+                    d = int(input("Enter Price: "))
+                    i[1] = a
+                    i[2] = b
+                    i[3] = c
+                    i[4] = d
+                    verify = 1
+                    break
+            if verify == 1:
+                listProd()  # print list function
+                print("\t\tProduct Updated...")
+                verify = 0
+            else:
+                print("\t\tProduct Not Found...")
+        except:
+            print("something went wrong, invalid input")
         resp = input("\n\tUpdate Another Product [Y/N]: ")
         if resp.lower() == "y":
             continue
