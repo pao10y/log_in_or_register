@@ -41,7 +41,9 @@ def log_in():
         for i in registered_users:
             if username.lower() == i[0].lower():
                 username = i[0]
-        
+        for i in admin_users:
+            if username.lower() == i[0].lower():
+                username = i[0]        
         credentials = [username, password]
         
         if credentials in admin_users:
@@ -59,6 +61,11 @@ def register(): # admin registers are closed, no outside user can be an admin
     while True:
         r_username = input("Enter your username: ")
         for i in registered_users:
+            if r_username.lower() == i[0].lower():
+                print("Username Already Taken")
+                return 3
+        break
+        for i in admin_users:
             if r_username.lower() == i[0].lower():
                 print("Username Already Taken")
                 return 3
