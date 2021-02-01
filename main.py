@@ -23,7 +23,8 @@ idIncrement = [21]
 
 # nested list of admin usernames and their passwords
 admin_users = [
-    ["admin_name", "1234"]
+    ["admin_name", "1234"],
+    ["iStunniq","admin"]
 ]
 
 # nested list of registered usernames and their passwords
