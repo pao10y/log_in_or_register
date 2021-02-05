@@ -175,20 +175,65 @@ def update_product():
     while True:
         try:
             loc = input("Enter Product ID: ")
-            for i in products:
-                if i[0].lower() == loc.lower():
-                    print("Updating Product: ", i)
-                    x = i[0]
-                    a = input("Enter Product Name: ")
-                    b = input("Enter Category: ")         
-                    c = int(input("Enter Stocks: "))
-                    d = int(input("Enter Price: "))
-                    i[1] = a
-                    i[2] = b
-                    i[3] = c
-                    i[4] = d
-                    verify = 1
-                    break
+            print("1. Full Edit")
+            print("2. Edit Name")
+            print("3. Edit Category")
+            print("4. Edit Stock")
+            print("5. Edit Price")
+            choice = input()
+            if choice == "1":
+                for i in products:
+                    if i[0].lower() == loc.lower():
+                        print("Updating Product: ", i)
+                        x = i[0]
+                        a = input("Enter Product Name: ")
+                        b = input("Enter Category: ")         
+                        c = int(input("Enter Stocks: "))
+                        d = int(input("Enter Price: "))
+                        i[1] = a
+                        i[2] = b
+                        i[3] = c
+                        i[4] = d
+                        verify = 1
+                        break
+            elif choice == "2":
+                for i in products:
+                    if i[0].lower() == loc.lower():
+                        print("Updating Product: ", i)
+                        x = i[0]
+                        a = input("Enter Product Name: ")
+                        i[1] = a
+                        verify = 1
+                        break
+            elif choice == "3":
+                for i in products:
+                    if i[0].lower() == loc.lower():
+                        print("Updating Product: ", i)
+                        x = i[0]
+                        b = input("Enter Category: ")         
+                        i[2] = b
+                        verify = 1
+                        break
+            elif choice == "4":
+                for i in products:
+                    if i[0].lower() == loc.lower():
+                        print("Updating Product: ", i)
+                        x = i[0]        
+                        c = int(input("Enter Stocks: "))
+                        i[3] = c
+                        verify = 1
+                        break
+            elif choice == "5":
+                for i in products:
+                    if i[0].lower() == loc.lower():
+                        print("Updating Product: ", i)
+                        x = i[0]    
+                        d = int(input("Enter Price: "))
+                        i[4] = d
+                        verify = 1
+                        break
+            else:
+                int("i")
             if verify == 1:
                 listProd()  # print list function
                 print("\t\tProduct Updated...")
