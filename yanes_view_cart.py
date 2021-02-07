@@ -45,20 +45,16 @@ cart = []
 
 # ADD TO CART METHOD 
 def add_to_cart():
-    print("\nAdd To Cart")
+    print("\nAdd To Cart") 
+    while True:
+        input_item = input("Please Enter a Valid Product ID: ")
+        for idx, item in enumerate(products):
+            if input_item.upper() == products[idx][0]:
+                cart.append(products[idx])
+                print("{} successfully added to cart! :)\n".format(products[idx][1]))
+                return
+        print("Invalid input. Please try again :(\n")
 
-    input_item = input("Please Enter a Valid Product ID: ")
-
-    for idx, item in enumerate(products):
-        if input_item == products[idx][0]:
-            cart.append(products[idx])
-            print("{} successfully added to cart! :)\n".format(products[idx][1]))
-            return
-        elif idx == len(products):
-            print("Invalid input. Please try again :(\n")
-            add_to_cart()
-        else:
-            continue
 
 # VIEW CART METHOD / SHOW ITEMS IN THE CART METHOD
 def view_cart():
