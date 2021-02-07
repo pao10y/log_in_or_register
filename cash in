@@ -1,0 +1,5 @@
+registered_user = [["username1", 1234, 0], ["username2", 5678, 0]]
+print("Please Enter Desired Amount:")
+customer[0][2]=int(input())
+
+//This is the General Idea
