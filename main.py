@@ -34,6 +34,7 @@ registered_users = [
 
 # LOG IN METHOD
 def log_in():
+    global username
     while True:
         print("\nLog-In")
         username = input("Enter username: ")
