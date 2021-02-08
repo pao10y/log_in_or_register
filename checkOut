@@ -1,5 +1,5 @@
 # inedit ko yung add to cart, sinama ko sa mga inappend is yung price ng item (para madali makuha total amount sa checkout)
-# tinanggal ko rin yung user na element tuwing gagawa ng list sa cart list?
+# tinanggal ko rin muna yung user na element tuwing gagawa ng list sa cart list?
 
 products = [
 
