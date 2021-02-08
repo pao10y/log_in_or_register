@@ -1,5 +1,5 @@
 # inedit ko yung add to cart, sinama ko sa mga inappend is yung price ng item (para madali makuha total amount sa checkout)
-# tinanggal ko rin muna yung user na element tuwing gagawa ng list sa cart list?
+# tinanggal ko rin yung user na element tuwing gagawa ng list sa cart list?
 
 products = [
 
@@ -57,7 +57,7 @@ def view_cart():
 
     print("\nYou have {} item/s in the cart: ".format(len(cart)))
     for idx, item in enumerate(cart):
-        print("\tItem {}: {} \n\t\t\tQuantity: {} \n\t\t\tPrice: {}".format(idx + 1, item[0], item[1], item[2]*item[1]))
+        print("\tItem {}: {} \n\t\t\tQuantity: {} \n\t\t\tUnit Price: {} \n\t\t\tTotal Price: {}".format(idx + 1, item[0], item[1], item[2], item[2]*item[1]))
     return
 
 
@@ -67,8 +67,11 @@ def view_boughtCart(bought):
 
     print("You have bought {} item/s: ".format(len(bought)))
     for idx, item in enumerate(bought):
-        print("\tItem {}: {} \n\t\t\tQuantity: {} \n\t\t\tPrice: {}".format(idx + 1, item[0], item[1],
-                                                                                item[2] * item[1]))
+        print(
+            "\tItem {}: {} \n\t\t\tQuantity: {} \n\t\t\tUnit Price: {} \n\t\t\tTotal Price: {}".format(idx + 1, item[0],
+                                                                                                       item[1], item[2],
+                                                                                                       item[2] * item[
+                                                                                                           1]))
     return
 
 
