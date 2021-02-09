@@ -300,6 +300,16 @@ def findProd():
         else:
             print("Invalid! Going back to the search selection")
             
+#SALES HISTORY
+def sales_history():
+    total_sales=0
+    print ("\nSales History \n")
+    for idx, item in enumerate(bought):        
+        print("\tItem {}: \n\t\tItem Name: {} \n\t\tProductID: {} \n\t\tCategory: {} \n\t\tQuantity: {} \n\t\tUnit Price: ₱{:,.2f} \n\t\tTotal Price: ₱{:,.2f}  ".format(idx + 1, item[0], item[3], item[4], item[1], item[2],item[2] * item[1]))
+        total_sales= total_sales+(item[1]*item[2])
+    print ("\n\tTOTAL SALES: ",total_sales)
+    return
+            
 # MAIN FUNCTION
 def main():
     while True:
@@ -342,7 +352,7 @@ def main():
                 elif choice == '5':
                     findProd()
                 elif choice == '6':
-                    print("This function is currently unavailable.")
+                    sales_history()
                 elif choice == '7':                    
                     print("Logging out...")
                     break
