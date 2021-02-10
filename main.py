@@ -1,3 +1,4 @@
+import copy
 products=[["PRODUCT ID", "PRODUCT NAME","CATEGORY", "STOCKS", "PRICE"],
             ["S0001","WH-CH510 Wireless Headphone","Headphones",10,2999.00],
             ["S0002","MDR-XB55AP EXTRA BASS","Headphones",3,1499.00],
@@ -20,7 +21,12 @@ products=[["PRODUCT ID", "PRODUCT NAME","CATEGORY", "STOCKS", "PRICE"],
             ["S0019","XPeria XA1","Cellphone",13,14890.00],
             ["S0020","XPeria XA1 Ultra","Cellphone",3,19090.00],]
 idIncrement = [21]
-
+sales = copy.deepcopy(products)
+for i in sales:
+    if i[3] == "STOCKS":
+        i[3] = "SALES"
+    else:
+        i[3] = 0
 # nested list of admin usernames and their passwords
 admin_users = [
     ["admin_name", "1234"],
@@ -102,6 +108,26 @@ def listProd():
                 print(item[i], end=(" "*((l[i]+5) - len(str(item[i])))) )
         print()
     print("\n__________________________________________________________________________________________\n")
+#SHOW SALES FUNCTION
+def listSales():
+    l = [0,0,0,0,0]
+    for lists in sales:
+        for i in range(5):
+            if l[i] < len(str(lists[i])):
+                l[i] = len(str(lists[i]))
+    print("\n__________________________________________________________________________________________\n")
+    total = 0
+    for item in sales:
+        if not item == sales[0]:
+            total = total + (item[3]*item[4])
+        for i in range(5):
+            if i == 4 and not item[i] == sales[0][4]:
+                print("₱"+"{:,.2f}".format(item[i]), end="")
+            else:
+                print(item[i], end=(" "*((l[i]+5) - len(str(item[i])))) )
+        print()
+    print("\nTotal value of sales: ₱{:,.2f}".format(total))
+    print("__________________________________________________________________________________________\n")
 
 # ADD PRODUCT
 def Add_product():
@@ -393,7 +419,7 @@ def main():
                 elif choice == '5':
                     findProd()
                 elif choice == '6':
-                    sales_history()
+                    listSales()
                 elif choice == '7':                    
                     print("Logging out...")
                     break
