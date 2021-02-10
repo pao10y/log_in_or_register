@@ -20,7 +20,8 @@ products=[["PRODUCT ID", "PRODUCT NAME","CATEGORY", "STOCKS", "PRICE"],
             ["S0018","XPeria XA2 Ultra","Cellphone",10,24490.00],
             ["S0019","XPeria XA1","Cellphone",13,14890.00],
             ["S0020","XPeria XA1 Ultra","Cellphone",3,19090.00],]
-idIncrement = [21]
+idIncrement = [21,1]
+
 sales = copy.deepcopy(products)
 for i in sales:
     if i[3] == "STOCKS":
@@ -147,6 +148,7 @@ def Add_product():
                 id = "S" + str(idIncrement[0]).zfill(4)
                 idIncrement[0] += 1
                 products.append([id,n,c,s,p])
+                sales.append([id,n,c,0,p])
                 listProd()
                 print("addition success")
             elif resp.lower() == "n":
@@ -173,6 +175,8 @@ def delete_product():
     listProd()  # print list function
 
     while True:
+        if len(products) == 1:
+            print("No products to delete")
         prodDel = input("\n\tEnter Product ID: ")
         for item in products:
             if prodDel.lower() == item[0].lower():
@@ -214,7 +218,6 @@ def update_product():
                 for i in products:
                     if i[0].lower() == loc.lower():
                         print("Updating Product: ", i)
-                        x = i[0]
                         a = input("Enter Product Name: ")
                         b = input("Enter Category: ")         
                         c = int(input("Enter Stocks: "))
@@ -222,6 +225,13 @@ def update_product():
                         i[1] = a
                         i[2] = b
                         i[3] = c
+                        i[4] = d
+                        verify = 1
+                        break
+                for i in sales:
+                    if i[0].lower() == loc.lower():
+                        i[1] = a
+                        i[2] = b
                         i[4] = d
                         verify = 1
                         break
@@ -234,6 +244,10 @@ def update_product():
                         i[1] = a
                         verify = 1
                         break
+                for i in sales:
+                    if i[0].lower() == loc.lower():
+                        i[1] = a
+                        break
             elif choice == "3":
                 for i in products:
                     if i[0].lower() == loc.lower():
@@ -242,6 +256,10 @@ def update_product():
                         b = input("Enter Category: ")         
                         i[2] = b
                         verify = 1
+                        break
+                for i in sales:
+                    if i[0].lower() == loc.lower():
+                        i[2] = b
                         break
             elif choice == "4":
                 for i in products:
@@ -260,6 +278,10 @@ def update_product():
                         d = int(input("Enter Price: "))
                         i[4] = d
                         verify = 1
+                        break
+                for i in sales:
+                    if i[0].lower() == loc.lower():
+                        i[4] = d
                         break
             else:
                 int("i")
@@ -350,8 +372,8 @@ def view_cart(user):
         for i in products:
             if item[0] == i[0]:
                 total = total + (int(item[2])*i[4])
-    print("Total Cost: {}".format(total))
-    return
+    print("Total Cost: ₱{:,.2f}".format(total))
+    return total
 def delete_cart(user):
     verify = 0
 
@@ -377,6 +399,49 @@ def delete_cart(user):
         else:
             print("\tInvalid choice, defaulting to N")
             break
+
+def checkOut(user):
+
+    print("\n\nCHECK OUT______________________________________")
+    if len(user[2]) == 0:
+        print("Cart is Empty")
+        return
+    total = view_cart(user)
+    print("Balance: ₱{:,.2f}".format(user[4]))
+    print("Do you want to Check-Out?[Y/N]")
+    choice = input().lower()
+    if choice =="n":
+        return
+    if total <= user[4]:
+        for idx, item in enumerate(user[2]):
+            user[3].append(item)
+            for i in sales:
+                if item[0] == i[0]:
+                    i[3] += item[2]
+        receipt = "#"+str(idIncrement[1]).zfill(6)
+        user[3].append(receipt)
+        idIncrement[1] += 1
+        user[2].clear()
+        user[4] -= total
+        print("Products successfully purchased, please check your orders to verify. your receipt is {}".format(receipt))
+        return
+    else:
+        print("Insufficient cash!")
+
+def view_orders(user):
+    print("\nView Orders")
+    incr = 1
+    if len(user[3]) == 0:
+        print("You have no orders to display")
+    for idx, item in enumerate(user[3]):
+        if type(item) == str:
+            print("Receipt for above items: {}".format(item))
+            incr = 1
+        else:
+            print("\tItem {}: {} {}".format(incr, item[2], item[1]))
+            incr += 1
+    return
+
 # MAIN FUNCTION
 def main():
     while True:
@@ -449,8 +514,18 @@ def main():
                 elif choice == '5':
                     delete_cart(admin_or_user)
                 elif choice == '6':
-                    sales_history()
-                elif choice == '9':                    
+                    checkOut(admin_or_user)
+                elif choice == '7':
+                    view_orders(admin_or_user)
+                elif choice == '8':
+                    try:
+                        val = input("How much pesos do you want to cash in? ")
+                        admin_or_user[4] += int(val)
+                    except:
+                        print("invalid input")
+                elif choice == '9':
+                    print("Balance: ₱{:,.2f}".format(admin_or_user[4]))
+                elif choice == '0':                    
                     print("Logging out...")
                     break
                 else:
