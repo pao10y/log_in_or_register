@@ -68,18 +68,15 @@ def log_in():
 # REGISTER METHOD
 def register(): # admin registers are closed, no outside user can be an admin
     print("\nRegister") 
-    while True:
-        r_username = input("Enter your username: ")
-        for i in registered_users:
-            if r_username.lower() == i[0].lower():
-                print("Username Already Taken")
-                return 3
-        break
-        for i in admin_users:
-            if r_username.lower() == i[0].lower():
-                print("Username Already Taken")
-                return 3
-        break
+    r_username = input("Enter your username: ")
+    for i in registered_users:
+        if r_username.lower() == i[0].lower():
+            print("Username Already Taken")
+            return 3
+    for i in admin_users:
+        if r_username.lower() == i[0].lower():
+            print("Username Already Taken")
+            return 3
     r_password = input("Enter password: ")
     r_repassword = input("Re-enter password: ")
     if r_password == r_repassword:
