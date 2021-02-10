@@ -29,12 +29,11 @@ admin_users = [
 
 # nested list of registered usernames and their passwords
 registered_users = [
-    ["username", "1234"]
+    ["username", "1234",[],[],0]
 ]
 
 # LOG IN METHOD
 def log_in():
-    global username
     while True:
         print("\nLog-In")
         username = input("Enter username: ")
@@ -50,12 +49,15 @@ def log_in():
         if credentials in admin_users:
             print("Admin User: {}".format(username))
             return 1 
-        elif credentials in registered_users:
-            print("Registered User: {}".format(username))
-            return 2 
         else:
+            valid = 0
+            for i in registered_users:
+                if i[0] == username:
+                    if i[1] == password:
+                        print("Registered User: {}".format(username))
+                        return i
             return
-    
+                            
 # REGISTER METHOD
 def register(): # admin registers are closed, no outside user can be an admin
     print("\nRegister") 
@@ -76,7 +78,7 @@ def register(): # admin registers are closed, no outside user can be an admin
     if r_password == r_repassword:
         # more information details can be implemented if necessary
 
-        r_credentials = [r_username, r_password]
+        r_credentials = [r_username, r_password,[],[],0]
 
         registered_users.append(r_credentials)
         print("Successfully registered! Now please log in :)")
@@ -256,49 +258,35 @@ def update_product():
 def findProd():
     f=0
     while f<1:
-        print("Would you like to search using product names(N) or by product ID(I)")
-        n=input()
-        if(n=='N' or n=='n'):
-            print("Please enter item name:")
-            i=input()
-            verify = 0
-            for x in products:
-                if (i.lower() in x[1].lower()):
-                    print(x)
-                    verify = 1
-            if verify == 1:
-                print("Would you like to search for another item?[Y/N]")
-                d=input()
-                if(d=='Y' or d=='y'):
-                    continue
-                elif(d=='N' or d=='n'):
-                    break
-                else:
-                    print("Invalid, Default to N")
-                    break
-            else:
-                print("Item not found")
-        
-        elif(n=='I' or n=='i'):
-            print("Please enter item ID:")
-            i=input()
-            for x in products:
-                if(i.lower()==x[0].lower()):
-                    print(x)
-                    print("Would you like to search for another item?(Y or N)")
-                    d=input()
-                    if(d=='Y' or d=='y'):
-                        break
-                    elif(d=='N' or d=='n'):
-                        f=2
-                        break
+        print("Please enter item name:")
+        name=input()
+        verify = 0
+        l = [0,0,0,0,0]
+        for lists in products:
+            for i in range(5):
+                if l[i] < len(str(lists[i])):
+                    l[i] = len(str(lists[i]))
+        for item in products:
+            if item == products[0] or name.lower() in item[1].lower():                
+                for i in range(5):
+                    if i == 4 and not item[i] == products[0][4]:
+                        print("₱"+"{:,.2f}".format(item[i]), end="")
                     else:
-                        print("invalid")
-                        break
+                        print(item[i], end=(" "*((l[i]+5) - len(str(item[i])))) )
+                print()
+                verify = 1
+        if verify == 1:
+            print("Would you like to search for another item?[Y/N]")
+            d=input()
+            if(d=='Y' or d=='y'):
+                continue
+            elif(d=='N' or d=='n'):
+                break
             else:
-                print("Item not found")
+                print("Invalid, Default to N")
+                break
         else:
-            print("Invalid! Going back to the search selection")
+            print("No item found with {}".format(name))
             
 #SALES HISTORY
 def sales_history():
@@ -309,7 +297,60 @@ def sales_history():
         total_sales= total_sales+(item[1]*item[2])
     print ("\n\tTOTAL SALES: ",total_sales)
     return
-            
+
+# ---------------------------------------USER FUNCTIONS--------------------------------------------
+#Add to cart Function
+def add_to_cart(user):
+    print("\nAdd To Cart") 
+    while True:
+        input_item = input("Please Enter a Valid Product ID: ")
+        for idx, item in enumerate(products):
+            if input_item.upper() == products[idx][0]:
+                input_itemno = int(input("How many product do you want to add to cart: "))
+                if input_itemno <= products[idx][3]:
+                    products[idx][3] = products[idx][3] - input_itemno
+                    newcart = [products[idx][0],products[idx][1],input_itemno]
+                    user[2].append(newcart)
+                    print("{} {} successfully added to cart! :)\n".format(input_itemno, products[idx][2]))
+                    return
+        print("Invalid input. Please try again :(\n")
+        return
+def view_cart(user):
+    print("\nView Cart")
+    total = 0
+    print("You have {} item/s in the cart: ".format(len(user[2])))
+    for idx, item in enumerate(user[2]):
+        print("\tItem {}: {} {}".format(idx + 1, item[2], item[1]))
+        for i in products:
+            if item[0] == i[0]:
+                total = total + (int(item[2])*i[4])
+    print("Total Cost: {}".format(total))
+    return
+def delete_cart(user):
+    verify = 0
+
+    while True:
+        if len(user[2]) == 0:
+            print("Cart is Empty")
+            break
+        view_cart(user)  # print list function
+        itemdel = int(input("\n\tEnter Item Number: "))
+        for idx, item in enumerate(user[2]):
+            for i in products:
+                if item[0] == i[0]:
+                    i[3] = i[3] + item[2]
+        del user[2][itemdel-1]
+        print("Item Deleted")
+        view_cart(user)
+
+        p = input("\n\tDelete another product [Y/N]: ")
+        if p.lower() == "y":
+            continue
+        elif p.lower() == "n":
+            break
+        else:
+            print("\tInvalid choice, defaulting to N")
+            break
 # MAIN FUNCTION
 def main():
     while True:
@@ -333,20 +374,20 @@ def main():
             continue
         if admin_or_user == 1:
             while True:
-                print("1. Add new product")
-                print("2. Delete product")
-                print("3. View all products")
+                print("1. View all products")
+                print("2. Add new product")
+                print("3. Delete product")
                 print("4. Update a product")
                 print("5. Search product")
                 print("6. Sales History")
                 print("7. Log-out")
                 choice = input()
                 if choice == '1':
-                    Add_product()
-                elif choice == '2':
-                    delete_product()
-                elif choice == '3':
                     listProd()
+                elif choice == '2':
+                    Add_product()
+                elif choice == '3':
+                    delete_product()
                 elif choice == '4':
                     update_product()
                 elif choice == '5':
@@ -358,8 +399,36 @@ def main():
                     break
                 else:
                     print("invalid choice.\n")
-        elif admin_or_user == 2:
-            print("Access to all registered user functions")
+        elif admin_or_user in registered_users:
+            while True:
+                print("\n1. View all products")
+                print("2. Search Product")
+                print("3. View Cart")
+                print("4. Add to Cart")
+                print("5. Delete from Cart")
+                print("6. Checkout")
+                print("7. View Orders")
+                print("8. Cash-in")
+                print("9. View Balance")
+                print("0. Log-out")
+                choice = input()
+                if choice == '1':
+                    listProd()
+                elif choice == '2':
+                    findProd()
+                elif choice == '3':
+                    view_cart(admin_or_user)
+                elif choice == '4':
+                    add_to_cart(admin_or_user)
+                elif choice == '5':
+                    delete_cart(admin_or_user)
+                elif choice == '6':
+                    sales_history()
+                elif choice == '9':                    
+                    print("Logging out...")
+                    break
+                else:
+                    print("invalid choice.\n")
         elif admin_or_user == 3:
             continue
         else:
