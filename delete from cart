@@ -72,12 +72,16 @@ def view_cart():
         
 #DELETE FROM CART 
 def delete_cart():
-    verify = 0
     p = "y"
 
     while True:
         view_cart()  # print list function
         itemdel = int(input("\n\tEnter Item Number: "))
+        if itemdel is not cart:
+            print("There is none of that item!")
+            break
+        else:
+            continue
         del cart[itemdel-1]
         print("Item Deleted")
         view_cart()
