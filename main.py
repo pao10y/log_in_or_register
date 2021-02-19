@@ -379,13 +379,21 @@ def delete_cart(user):
             print("Cart is Empty")
             break
         view_cart(user)  # print list function
-        itemdel = int(input("\n\tEnter Item Number: "))
-        for idx, item in enumerate(user[2]):
-            for i in products:
-                if item[0] == i[0]:
-                    i[3] = i[3] + item[2]
-        del user[2][itemdel-1]
-        print("Item Deleted")
+        try:
+            itemdel = int(input("\n\tEnter Item Number(0 to exit): "))
+            if itemdel == 0:
+                print("Returning home")
+                break
+            elif itemdel < 0:
+                int("x")
+            for idx, item in enumerate(user[2]):
+                for i in products:
+                    if item[0] == i[0]:
+                        i[3] = i[3] + item[2]
+            del user[2][itemdel-1]
+            print("Item Deleted")
+        except:
+            print("Invalid Input")
         view_cart(user)
 
         p = input("\n\tDelete another product [Y/N]: ")
