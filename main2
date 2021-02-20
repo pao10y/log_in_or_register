@@ -1,0 +1,671 @@
+import copy
+import os
+from time import sleep
+
+products = [["PRODUCT ID", "PRODUCT NAME", "CATEGORY", "STOCKS", "PRICE"],
+            ["S0001", "WH-CH510 Wireless Headphone", "Headphones", 10, 2999.00],
+            ["S0002", "MDR-XB55AP EXTRA BASS", "Headphones", 3, 1499.00],
+            ["S0003", "XB550AP EXTRA BASS", "Headphones", 8, 2999.00],
+            ["S0004", "W830 Compact Camera", "Camera", 10, 6999.00],
+            ["S0005", "H300 Camera", "Camera", 7, 12999.00],
+            ["S0006", "XB01 EXTRA BASS", "Speaker", 15, 1999.00],
+            ["S0007", "GTK-PG10 Outdoor Speaker", "Speaker", 2, 12999.00],
+            ["S0008", "XB32 EXTRA BASS", "Speaker", 12, 6799.00],
+            ["S0009", "MDR-E9LP In-ear", "Earphones", 15, 499.00],
+            ["S0010", "MDR-XB55AP In-ear", "Earphones", 9, 1499.00],
+            ["S0011", "WI-SP51 Wireless In-ear", "Earphones", 6, 4299.00],
+            ["S0012", "WS410 Walkman", "MP3 Player", 3, 4999.00],
+            ["S0013", "A50 Walkman", "MP3 Player", 5, 9999.00],
+            ["S0014", "WS620 Walkman", "MP3 Player", 5, 6999.00],
+            ["S0015", "WF-XB700 Truly Wireless", "Headphones", 6, 6799.00],
+            ["S0016", "XPeria XA", "Cellphone", 14, 10690.00],
+            ["S0017", "XPeria X", "Cellphone", 10, 15890.00],
+            ["S0018", "XPeria XA2 Ultra", "Cellphone", 10, 24490.00],
+            ["S0019", "XPeria XA1", "Cellphone", 13, 14890.00],
+            ["S0020", "XPeria XA1 Ultra", "Cellphone", 3, 19090.00], ]
+idIncrement = [21, 1]
+
+sales = copy.deepcopy(products)
+for i in sales:
+    if i[3] == "STOCKS":
+        i[3] = "SALES"
+    else:
+        i[3] = 0
+# nested list of admin usernames and their passwords
+admin_users = [
+    ["admin_name", "1234"],
+    ["iStunniq", "admin"]
+]
+
+# nested list of registered usernames and their passwords
+registered_users = [
+    ["username", "1234", [], [], 0]
+]
+
+
+def homeScreen():
+    os.system('cls')
+    print("\n\n")
+    print("\t\t\t\t\t\t    __      ___  ___          ")
+    print("\t\t\t\t\t\t   |__) \ /  |  |__  |    \ /")
+    print("\t\t\t\t\t\t   |__)  |   |  |___ |___  | ")
+    print("\t\t\t\t ", "_" * 18, "| |", "=" * 13, "| |", "_" * 19, "\n\t\t\t\t", "|_" * 30, "|", "\n\t\t\t\t", "|_" * 30, "|", "\n\t\t\t\t", "|",
+          "_|" * 9,
+          "_|", " " * 13, "|_" * 11, "|", "\n\t\t\t\t |_|.", " " * 13, "|", "_|", "_" * 12, " |_|", " " * 16, "|_|",
+          "\n\t\t\t\t |_|*`", " " * 12, "|", "_|", " " * 4, "||", " " * 5, "|_|  //", " " * 12, "|_|", "\n\t\t\t\t |_| S `.",
+          " " * 9, "|", "_|", " " * 4, "||", " " * 5, "|_|  computer parts ", "|_|", "\n\t\t\t\t |_|`. A `", "   //", " " * 2,
+          "|", "_|", " " * 4, "||", " " * 5, "|_|       and", " " * 6, "|_|", "\n\t\t\t\t |_|  `. L `. ", " " * 4, "|", "_|",
+          " " * 2, "[ || ]", " " * 3, "|_|    accessories ", " |_|", "\n\t\t\t\t |_|    `. E `. ", " " * 2, "|", "_|",
+          " " * 4, "||", " " * 5, "|_| ", " " * 15, "|_|", "\n\t\t\t\t", "|_|", "_" * 14, "|", "_|", "_" * 4, "||", "_" * 5,
+          "|_|", "_" * 16, "|_|", "\n\t\t\t\t", "|_" * 9, "|", "_|", "_" * 4, "||", "_" * 5, "|_" * 11, "|", "\n\t\t\t\t   ",
+          "          /"*5, "\n\t\t\t\t", "_________/"*6,)
+
+    print("\n\n")
+
+# LOG IN METHOD
+def log_in():
+    while True:
+        print("\n", "\t" * 7, "Log-In")
+        print("\n", "\t" * 5, "_" * 45)
+        username = input("\n\n\t\t\t\t\t\tEnter username: ")
+        password = input("\t\t\t\t\t\tEnter password: ")
+        for i in registered_users:
+            if username.lower() == i[0].lower():
+                username = i[0]
+        for i in admin_users:
+            if username.lower() == i[0].lower():
+                username = i[0]
+        credentials = [username, password]
+
+        if credentials in admin_users:
+            print("\n\n\t\t\t\t\t\tAdmin User: {}".format(username))
+            return 1
+        else:
+            valid = 0
+            for i in registered_users:
+                if i[0] == username:
+                    if i[1] == password:
+                        print("\n\t\t\t\t\t\tRegistered User: {}".format(username))
+                        return i
+            return
+
+
+# REGISTER METHOD
+def register():  # admin registers are closed, no outside user can be an admin
+    print("\n", "\t" * 7, "Register")
+    print("\n", "\t" * 5, "_" * 45)
+    r_username = input("\n\n\t\t\t\t\t\tEnter your username: ")
+    for i in registered_users:
+        if r_username.lower() == i[0].lower():
+            print("\n\t\t\t\t\t\tUsername Already Taken")
+            return 3
+    for i in admin_users:
+        if r_username.lower() == i[0].lower():
+            print("\n\t\t\t\t\t\tUsername Already Taken")
+            return 3
+    r_password = input("\t\t\t\t\t\tEnter password: ")
+    r_repassword = input("\t\t\t\t\t\tRe-enter password: ")
+    if r_password == r_repassword:
+        # more information details can be implemented if necessary
+
+        r_credentials = [r_username, r_password, [], [], 0]
+
+        registered_users.append(r_credentials)
+        print("\n\t\t\t\t\tSuccessfully registered! Now please log in :)")
+        return 3
+    else:
+        print("\n\t\t\tRe-entered password and password must be the same, returning to initial prompt")
+        return 3
+
+
+# SHOW PRODUCTS FUNCTION
+def listProd():
+    l = [0, 0, 0, 0, 0]
+    for lists in products:
+        for i in range(5):
+            if l[i] < len(str(lists[i])):
+                l[i] = len(str(lists[i]))
+    print("\n__________________________________________________________________________________________\n")
+    for item in products:
+        for i in range(5):
+            if i == 4 and not item[i] == products[0][4]:
+                print("₱" + "{:,.2f}".format(item[i]), end="")
+            else:
+                print(item[i], end=(" " * ((l[i] + 5) - len(str(item[i])))))
+        print()
+    print("\n__________________________________________________________________________________________\n")
+    return
+
+
+# SHOW SALES FUNCTION
+def listSales():
+    l = [0, 0, 0, 0, 0]
+
+    for lists in sales:
+        for i in range(5):
+            if l[i] < len(str(lists[i])):
+                l[i] = len(str(lists[i]))
+    print("\n__________________________________________________________________________________________\n")
+    total = 0
+    for item in sales:
+        if not item == sales[0]:
+            total = total + (item[3] * item[4])
+        for i in range(5):
+            if i == 4 and not item[i] == sales[0][4]:
+                print("₱" + "{:,.2f}".format(item[i]), end="")
+            else:
+                print(item[i], end=(" " * ((l[i] + 5) - len(str(item[i])))))
+        print()
+    print("\nTotal value of sales: ₱{:,.2f}".format(total))
+    print("__________________________________________________________________________________________\n")
+
+
+
+# ADD PRODUCT
+def Add_product():
+
+    os.system('cls')
+    listProd()
+    print("\n\tADDITION OF NEW PRODUCT")
+    while True:
+        try:
+            n = input("\n\tEnter name of product: ")
+            c = input("\tEnter category: ")
+            s = int(input("\tEnter stocks: "))
+            p = int(input("\tEnter price: "))
+            print("\n", "_"*90, "\n\n\tNEW PRODUCT DETAILS")
+            print("\n\tItem: ", n)
+            print("\tCategory: ", c)
+            print("\tStock: ", s)
+            print("\tPrice: ", p)
+            resp = input("\n\tDo you want to add this item? [Y/N]:  ")
+            if resp.lower() == "y":
+                id = "S" + str(idIncrement[0]).zfill(4)
+                idIncrement[0] += 1
+                products.append([id, n, c, s, p])
+                sales.append([id, n, c, 0, p])
+                os.system('cls')
+                listProd()
+                print("\tAddition success!")
+            elif resp.lower() == "n":
+                print("\tAddition cancelled!")
+            else:
+                print("\tinvalid input")
+            resp = input("\n\tDo you want to add another item? [Y/N]:  ")
+            print("_"*90)
+            if resp.lower() == "y":
+                continue
+            elif resp.lower() == "n":
+                break
+            else:
+                print("\t\tInvalid input, defaulting to N")
+                break
+        except:
+            print("\t\tSomething went wrong, please try again")
+            continue
+
+
+# DELETE FUNCTION
+def delete_product():
+    verify = 0
+    resp = "y"
+
+    os.system('cls')
+    listProd()
+    print("\n\tDELETION OF PRODUCT")
+    while True:
+        if len(products) == 1:
+            print("\tNo products to delete")
+        prodDel = input("\n\tEnter Product ID: ")
+        for item in products:
+            if prodDel.lower() == item[0].lower():
+                products.remove(item)
+                verify = 1
+        if verify == 1:
+            os.system('cls')
+            listProd()
+            print("\tProduct deleted...")
+            verify = 0
+        else:
+            print("\tProduct not found...")
+
+        resp = input("\n\tDelete another product [Y/N]: ")
+        print("_" * 90)
+        if resp.lower() == "y":
+            continue
+        elif resp.lower() == "n":
+            break
+        else:
+            print("\tInvalid choice, defaulting to N")
+            print("\n\n\t<---- Returning home")
+            break
+
+
+# UPDATE FUNCTION
+def update_product():
+    verify = 0
+    resp = "y"
+
+    os.system('cls')
+    listProd()
+    print("\n\tUPDATING A PRODUCT")
+    while True:
+        try:
+            loc = input("\n\tEnter Product ID: ")
+            print("\n", "_" * 90)
+            print("\n\tUPDATE TYPES")
+            print("\n\t[1] Full Edit \t\t [4] Edit Stock")
+            print("\t[2] Edit Name \t\t [5] Edit Price")
+            print("\t[3] Edit Category")
+            choice = input("\n\tEnter Update Type: ")
+            if choice == "1":
+                for i in products:
+                    if i[0].lower() == loc.lower():
+                        print("_" * 90)
+                        print("\n\tUpdating Product: ", i)
+                        a = input("\tEnter Product Name: ")
+                        b = input("\tEnter Category: ")
+                        c = int(input("\tEnter Stocks: "))
+                        d = int(input("\tEnter Price: "))
+                        i[1] = a
+                        i[2] = b
+                        i[3] = c
+                        i[4] = d
+                        verify = 1
+                        break
+                for i in sales:
+                    if i[0].lower() == loc.lower():
+                        i[1] = a
+                        i[2] = b
+                        i[4] = d
+                        verify = 1
+                        break
+            elif choice == "2":
+                for i in products:
+                    if i[0].lower() == loc.lower():
+                        print("\n", "_" * 90)
+                        print("\n\tUpdating Product: ", i)
+                        x = i[0]
+                        a = input("\tEnter Product Name: ")
+                        i[1] = a
+                        verify = 1
+                        break
+                for i in sales:
+                    if i[0].lower() == loc.lower():
+                        i[1] = a
+                        break
+            elif choice == "3":
+                for i in products:
+                    if i[0].lower() == loc.lower():
+                        print("\n", "_" * 90)
+                        print("\n\tUpdating Product: ", i)
+                        x = i[0]
+                        b = input("\tEnter Category: ")
+                        i[2] = b
+                        verify = 1
+                        break
+                for i in sales:
+                    if i[0].lower() == loc.lower():
+                        i[2] = b
+                        break
+            elif choice == "4":
+                for i in products:
+                    if i[0].lower() == loc.lower():
+                        print("\n", "_" * 90)
+                        print("\n\tUpdating Product: ", i)
+                        x = i[0]
+                        c = int(input("\tEnter Stocks: "))
+                        i[3] = c
+                        verify = 1
+                        break
+            elif choice == "5":
+                for i in products:
+                    if i[0].lower() == loc.lower():
+                        print("\n", "_" * 90)
+                        print("\n\tUpdating Product: ", i)
+                        x = i[0]
+                        d = int(input("\tEnter Price: "))
+                        i[4] = d
+                        verify = 1
+                        break
+                for i in sales:
+                    if i[0].lower() == loc.lower():
+                        i[4] = d
+                        break
+            else:
+                int("i")
+            if verify == 1:
+                os.system('cls')
+                listProd()  # print list function
+                print("\tProduct Updated...")
+                verify = 0
+            else:
+                print("\tProduct Not Found...")
+        except:
+            print("\tSomething went wrong, invalid input")
+        resp = input("\n\tUpdate Another Product [Y/N]: ")
+        print("_" * 90)
+        if resp.lower() == "y":
+            continue
+        elif resp.lower() == "n":
+            print("\n\n\t<---- Returning home")
+            break
+        else:
+            print("\tInvalid Choice, Defaulting to N\n\n\t<---- Returning home")
+            break
+
+
+# SEARCH FUNCTION
+def findProd():
+    f = 0
+    os.system('cls')
+    print("\n\tSEARCH A PRODUCT")
+    print("\n", "_" * 90)
+    while f < 1:
+        name = input("\n\tPlease enter item name:")
+        print("\n", "_" * 90, "\n")
+        verify = 0
+        l = [0, 0, 0, 0, 0]
+        for lists in products:
+            for i in range(5):
+                if l[i] < len(str(lists[i])):
+                    l[i] = len(str(lists[i]))
+        for item in products:
+            if item == products[0] or name.lower() in item[1].lower():
+                for i in range(5):
+                    if i == 4 and not item[i] == products[0][4]:
+                        print("₱" + "{:,.2f}".format(item[i]), end="")
+                    else:
+                        print(item[i], end=(" " * ((l[i] + 5) - len(str(item[i])))))
+                print()
+                verify = 1
+        if verify == 1:
+            d = input("\n\n\tSearch for another item?[Y/N]")
+            print("_" * 90)
+            if (d == 'Y' or d == 'y'):
+                continue
+            elif (d == 'N' or d == 'n'):
+                print("\n\n\t<---- Returning home")
+                break
+            else:
+                print("Invalid, Default to N\n\n\t<---- Returning home")
+                break
+        else:
+            print("No item found with {}\n\n\t<---- Returning home".format(name))
+
+
+# SALES HISTORY
+def sales_history():
+    os.system('cls')
+    total_sales = 0
+    print("\nSales History \n")
+    for idx, item in enumerate(bought):
+        print(
+            "\tItem {}: \n\t\tItem Name: {} \n\t\tProductID: {} \n\t\tCategory: {} \n\t\tQuantity: {} \n\t\tUnit Price: ₱{:,.2f} \n\t\tTotal Price: ₱{:,.2f}  ".format(
+                idx + 1, item[0], item[3], item[4], item[1], item[2], item[2] * item[1]))
+        total_sales = total_sales + (item[1] * item[2])
+    print("\n\tTOTAL SALES: ", total_sales)
+    print("\n\n\t<---- Returning home")
+    return
+
+
+# ---------------------------------------USER FUNCTIONS--------------------------------------------
+# Add to cart Function
+def add_to_cart(user):
+    os.system('cls')
+    print("\n\n","_" * 10, "./", "\n", "#" * 10, "\n", "#" * 10, "\tA D D  TO  C A R T", "\n", " _________\ ", "\n", "(o)     " * 2)
+    listProd()
+    while True:
+        input_item = input("\n\tEnter a valid product ID: ")
+        for idx, item in enumerate(products):
+            if input_item.upper() == products[idx][0]:
+                input_itemno = int(input("\n\tEnter product quantity: "))
+                if input_itemno <= products[idx][3]:
+                    products[idx][3] = products[idx][3] - input_itemno
+                    newcart = [products[idx][0], products[idx][1], input_itemno]
+                    user[2].append(newcart)
+                    print("\n\t{} {} successfully added to cart! \n\n\n\t<----Returning home".format(input_itemno, products[idx][2]))
+                    return
+        print("\n\tInvalid input. Please try again")
+        print("\n\n\t<---- Returning home")
+        return
+
+
+def view_cart(user):
+    os.system('cls')
+    print("\n\n", "_" * 10, "./", "\n", "#" * 10, "\n", "#" * 10, "\tCART", "\n", " _________\ ", "\n", "(o)     " * 2)
+    total = 0
+    print("\n\n", "/\\"*25)
+    print("\nYou have {} item/s in the cart: \n".format(len(user[2])))
+    for idx, item in enumerate(user[2]):
+        print("\tItem {}: {} ({})".format(idx + 1, item[1], item[2]))
+        for i in products:
+            if item[0] == i[0]:
+                total = total + (int(item[2]) * i[4])
+    print("\n", "-" * 49, "\n")
+    print("\tTotal Cost: ₱{:,.2f}".format(total))
+    print("\n", "/\\" * 25, "\n\n")
+    return total
+
+
+def delete_cart(user):
+    verify = 0
+    os.system('cls')
+    print("\n\n", "_" * 10, "./", "\n", "#" * 10, "\n", "#" * 10, "\tD E L E T E  FROM  C A R T", "\n", " _________\ ", "\n",
+          "(o)     " * 2)
+    while True:
+        if len(user[2]) == 0:
+            print("Cart is Empty")
+            break
+        view_cart(user)
+        try:
+            print("\nD E L E T E  FROM  C A R T ", "_" * 12)
+            itemdel = int(input("\n\tEnter Item Number(0 to exit): "))
+            if itemdel == 0:
+                print("\n\n\t<---- Returning home")
+                break
+            elif itemdel < 0:
+                int("x")
+            for idx, item in enumerate(user[2]):
+                for i in products:
+                    if item[0] == i[0]:
+                        i[3] = i[3] + item[2]
+            del user[2][itemdel - 1]
+            print("Item Deleted")
+        except:
+            print("Invalid Input")
+        view_cart(user)
+
+        p = input("\n\tDelete another product [Y/N]: ")
+        if p.lower() == "y":
+            continue
+        elif p.lower() == "n":
+            print("\n\n\t<---- Returning home")
+            break
+        else:
+            print("\tInvalid choice, defaulting to N\n\n\t<---- Returning home")
+            break
+
+
+def checkOut(user):
+    os.system('cls')
+    print("\n\n", "_" * 10, "./", "\n", "#" * 10, "\n", "#" * 10, "\tCHECK OUT", "\n", " _________\ ", "\n", "(o)     " * 2)
+    if len(user[2]) == 0:
+        print("\n\n", "/\\" * 25)
+        print("\n\n\tCart is Empty")
+        print("\n\n", "/\\" * 25)
+        print("\n\n\t<---- Returning home")
+        return
+    total = view_cart(user)
+    print("\n\nC H E C K - O U T ", "_"*42)
+    print("\n\tBalance: ₱{:,.2f}".format(user[4]))
+    print("\n\tDo you want to Check-Out? [Y/N]")
+    choice = input().lower()
+    if choice == "n":
+        return
+    if total <= user[4]:
+        for idx, item in enumerate(user[2]):
+            user[3].append(item)
+            for i in sales:
+                if item[0] == i[0]:
+                    i[3] += item[2]
+        receipt = "#" + str(idIncrement[1]).zfill(6)
+        user[3].append(receipt)
+        idIncrement[1] += 1
+        user[2].clear()
+        user[4] -= total
+        print("\n\tProducts successfully purchased, please check your orders to verify. \n\tYour receipt is {}".format(receipt))
+        print("\n\n\t<---- Returning home")
+        return
+    else:
+        print("\n\tInsufficient cash!")
+        print("\n\n\t<---- Returning home")
+
+
+def view_orders(user):
+    os.system('cls')
+    print("\n\n", "_" * 10, "./", "\n", "#" * 10, "\n", "#" * 10, "\tV I E W  O R D E R S", "\n", " _________\ ", "\n", "(o)     " * 2)
+    incr = 1
+    print("\n\n", "/\\" * 25, "\n")
+    if len(user[3]) == 0:
+        print("You have no orders to display")
+    for idx, item in enumerate(user[3]):
+        if type(item) == str:
+            print("Receipt for above items: {}\n".format(item))
+            incr = 1
+        else:
+            print("\tItem {}: {} {}".format(incr, item[2], item[1]))
+            incr += 1
+    print("\n\n", "/\\" * 25)
+    print("\n\n\t<---- Returning home")
+    return
+
+
+# MAIN FUNCTION
+def main():
+    while True:
+        homeScreen()
+        print("\n", "\t"*5, "  [1] Log-in", "\t", "[2] Register", "\t", "[3] Exit")
+        print("\n", "\t"*5, "_"*45)
+        user_input = input("\n\n\t\t\t\t\t\tEnter [#]: ")
+
+        if user_input.isdigit():
+            if int(user_input) == 1:
+                os.system('cls')
+                homeScreen()
+                admin_or_user = log_in()
+                sleep(2)
+            elif int(user_input) == 2:
+                os.system('cls')
+                homeScreen()
+                admin_or_user = register()
+                sleep(2)
+            elif int(user_input) == 3:
+                print("\n\n\t\t\t\t\t\tProgram Terminated\n")
+                break
+            else:
+                print("\n\n\t\t\t\t\t\tInvalid input. Please try again :(\n")
+                sleep(0.5)
+                continue
+        else:
+            print("\n\n\t\t\t\t\t\tInvalid input. Please try again :(\n")
+            sleep(0.5)
+            continue
+        if admin_or_user == 1:
+            while True:
+                homeScreen()
+                print("\n\t\t\t\t\t[1] View all products \t\t[5] Search a product \n\t\t\t\t\t[2] Add new product \t\t[6] "
+                      "Sales History \n\t\t\t\t\t[3] Delete a product \t\t[7] Log-out \n\t\t\t\t\t[4] Update a product")
+                print("\n", "\t" * 5, "_" * 45)
+                choice = input("\n\n\t\t\t\t\t\tEnter [#]: ")
+                if choice == '1':
+                    os.system('cls')
+                    listProd()
+                    sleep(3)
+                elif choice == '2':
+                    Add_product()
+                    sleep(3)
+                elif choice == '3':
+                    delete_product()
+                    sleep(2)
+                elif choice == '4':
+                    update_product()
+                    sleep(3)
+                elif choice == '5':
+                    findProd()
+                    sleep(3)
+                elif choice == '6':
+                    listSales()
+                    sleep(3)
+                elif choice == '7':
+                    print("\n\n\t\t\t\t\t\tLogging out...")
+                    break
+                else:
+                    print("\n\n\t\t\t\t\t\tinvalid choice.\n")
+        elif admin_or_user in registered_users:
+            while True:
+                homeScreen()
+                print("\n\t\t\t\t\t[1] View all products \t\t[6] Checkout \n\t\t\t\t\t[2] Search product \t\t[7] "
+                      "View Orders \n\t\t\t\t\t[3] View cart \t\t\t[8] Cash-in \n\t\t\t\t\t[4] Add to Cart "
+                      "\t\t[9] View Balance \n\t\t\t\t\t[5] Delete from Cart \t\t[0] Log-out")
+                print("\n", "\t" * 5, "_" * 45)
+                choice = input("\n\n\t\t\t\t\t\tEnter [#]: ")
+                if choice == '1':
+                    os.system('cls')
+                    listProd()
+                    sleep(3)
+                elif choice == '2':
+                    findProd()
+                    sleep(1)
+                elif choice == '3':
+                    view_cart(admin_or_user)
+                    sleep(3)
+                elif choice == '4':
+                    add_to_cart(admin_or_user)
+                    sleep(2)
+                elif choice == '5':
+                    delete_cart(admin_or_user)
+                    sleep(2)
+                elif choice == '6':
+                    checkOut(admin_or_user)
+                    sleep(5)
+                elif choice == '7':
+                    view_orders(admin_or_user)
+                    sleep(2)
+                elif choice == '8':
+                    try:
+                        os.system('cls')
+                        print(
+                            "\n\n\t     _________ \n\t    / ======= \ \n\t   / __________\ \n\t  | ___________ |\n\t  | | -       | |"
+                            "\n\t  | |         | | ", "B A L A N C E: ₱{:,.2f}".format(admin_or_user[4]), "\n\t  | |_________| |", "_" * 50,
+                            "\n\t  \=____________/", " " * 49, ")", "\n\t  / ::::::::::: \ ", " " * 47, "/",
+                            "\n\t / ::::::::::::: \ ", " " * 42, "=D-'", "\n\t(_________________)")
+                        print("\n\tC A S H - I N", "_" * 32)
+                        val = input("\n\tEnter amount: ₱ ")
+                        admin_or_user[4] += int(val)
+                    except:
+                        print("invalid input")
+                        sleep(1)
+                elif choice == '9':
+                    os.system('cls')
+                    print("\n\n\t     _________ \n\t    / ======= \ \n\t   / __________\ \n\t  | ___________ |\n\t  | | -       | |"
+                        "\n\t  | |         | | ", "B A L A N C E: ₱{:,.2f}".format(admin_or_user[4]), "\n\t  | |_________| |", "_"*50,
+                        "\n\t  \=____________/", " "*49, ")", "\n\t  / ::::::::::: \ ", " "*47, "/",
+                        "\n\t / ::::::::::::: \ ", " " * 42, "=D-'", "\n\t(_________________)")
+                    # print("Balance: ₱{:,.2f}".format(admin_or_user[4]))
+                    sleep(5)
+                elif choice == '0':
+                    print("\n\n\t\t\t\t\t\tLogging out...")
+                    sleep(1)
+                    break
+                else:
+                    print("\n\n\t\t\t\t\t\tinvalid choice.\n")
+                    sleep(1)
+        elif admin_or_user == 3:
+            continue
+        else:
+            print("\n\n\t\t\t\t\t\tUser not Found :(\n")
+            sleep(1)
+
+
+main()  # calls the main function for the code to run
