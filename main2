@@ -609,7 +609,6 @@ def main():
                     sleep(2)
                 elif choice == '5':
                     findProd()
-                    input("\t\t\tpress enter to continue")
                     sleep(1)
                 elif choice == '6':
                     listSales()
