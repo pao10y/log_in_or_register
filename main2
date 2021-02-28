@@ -509,7 +509,6 @@ def checkOut(user):
         print("\n\n", "/\\" * 25)
         print("\n\n\tCart is Empty")
         print("\n\n", "/\\" * 25)
-        print("\n\n\t<---- Returning home")
         return
     total = view_cart(user)
     print("\n\nC H E C K - O U T ", "_"*42)
@@ -530,11 +529,9 @@ def checkOut(user):
         user[2].clear()
         user[4] -= total
         print("\n\tProducts successfully purchased, please check your orders to verify. \n\tYour receipt is {}".format(receipt))
-        print("\n\n\t<---- Returning home")
         return
     else:
         print("\n\tInsufficient cash!")
-        print("\n\n\t<---- Returning home")
 
 
 def view_orders(user):
@@ -552,7 +549,6 @@ def view_orders(user):
             print("\tItem {}: {} {}".format(incr, item[2], item[1]))
             incr += 1
     print("\n\n", "/\\" * 25)
-    print("\n\n\t<---- Returning home")
     return
 
 
@@ -641,11 +637,9 @@ def main():
                     sleep(1)
                 elif choice == '4':
                     add_to_cart(admin_or_user)
-                    input("\t\t\tpress enter to continue")
                     sleep(1)
                 elif choice == '5':
                     delete_cart(admin_or_user)
-                    input("\t\t\tpress enter to continue")
                     sleep(1)
                 elif choice == '6':
                     checkOut(admin_or_user)
@@ -676,7 +670,7 @@ def main():
                         "\n\t  \=____________/", " "*49, ")", "\n\t  / ::::::::::: \ ", " "*47, "/",
                         "\n\t / ::::::::::::: \ ", " " * 42, "=D-'", "\n\t(_________________)")
                     # print("Balance: P{:,.2f}".format(admin_or_user[4]))
-                    input("\t\t\tpress enter to continue")
+                    input("\n\t\t\tpress enter to continue")
                     sleep(1)
                 elif choice == '0':
                     print("\n\n\t\t\t\t\t\tLogging out...")
