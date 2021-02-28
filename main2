@@ -130,7 +130,7 @@ def listProd():
     for item in products:
         for i in range(5):
             if i == 4 and not item[i] == products[0][4]:
-                print("₱" + "{:,.2f}".format(item[i]), end="")
+                print("P" + "{:,.2f}".format(item[i]), end="")
             else:
                 print(item[i], end=(" " * ((l[i] + 5) - len(str(item[i])))))
         print()
@@ -155,13 +155,14 @@ def listSales():
             total = total + (item[3] * item[4])
         for i in range(5):
             if i == 4 and not item[i] == sales[0][4]:
-                print("₱" + "{:,.2f}".format(item[i]), end="")
+                print("P" + "{:,.2f}".format(item[i]), end="")
             else:
                 print(item[i], end=(" " * ((l[i] + 5) - len(str(item[i])))))
         print()
         print('\t\t\t', end="")
-    print("\n\t\t\tTotal value of sales: ₱{:,.2f}".format(total))
+    print("\n\t\t\tTotal value of sales: P{:,.2f}".format(total))
     print("\n\t\t\t__________________________________________________________________________________________\n")
+    return
 
 
 
@@ -378,11 +379,11 @@ def findProd():
             if item == products[0] or name.lower() in item[1].lower():
                 for i in range(5):
                     if i == 4 and not item[i] == products[0][4]:
-                        print("₱" + "{:,.2f}".format(item[i]), end="")
+                        print("P" + "{:,.2f}".format(item[i]), end="")
+                        verify = 1
                     else:
                         print(item[i], end=(" " * ((l[i] + 5) - len(str(item[i])))))
                 print()
-                verify = 1
         if verify == 1:
             d = input("\n\n\tSearch for another item?[Y/N]")
             print("_" * 90)
@@ -395,7 +396,17 @@ def findProd():
                 print("Invalid, Default to N\n\n\t<---- Returning home")
                 break
         else:
-            print("No item found with {}\n\n\t<---- Returning home".format(name))
+            print("\n\nNo item found with {}".format(name))
+            d = input("\n\n\tSearch for another item?[Y/N]")
+            print("_" * 90)
+            if (d == 'Y' or d == 'y'):
+                continue
+            elif (d == 'N' or d == 'n'):
+                print("\n\n\t<---- Returning home")
+                break
+            else:
+                print("Invalid, Default to N\n\n\t<---- Returning home")
+                break
 
 
 # SALES HISTORY
@@ -405,7 +416,7 @@ def sales_history():
     print("\nSales History \n")
     for idx, item in enumerate(bought):
         print(
-            "\tItem {}: \n\t\tItem Name: {} \n\t\tProductID: {} \n\t\tCategory: {} \n\t\tQuantity: {} \n\t\tUnit Price: ₱{:,.2f} \n\t\tTotal Price: ₱{:,.2f}  ".format(
+            "\tItem {}: \n\t\tItem Name: {} \n\t\tProductID: {} \n\t\tCategory: {} \n\t\tQuantity: {} \n\t\tUnit Price: P{:,.2f} \n\t\tTotal Price: P{:,.2f}  ".format(
                 idx + 1, item[0], item[3], item[4], item[1], item[2], item[2] * item[1]))
         total_sales = total_sales + (item[1] * item[2])
     print("\n\tTOTAL SALES: ", total_sales)
@@ -447,7 +458,7 @@ def view_cart(user):
             if item[0] == i[0]:
                 total = total + (int(item[2]) * i[4])
     print("\n", "-" * 49, "\n")
-    print("\tTotal Cost: ₱{:,.2f}".format(total))
+    print("\tTotal Cost: P{:,.2f}".format(total))
     print("\n", "/\\" * 25, "\n\n")
     return total
 
@@ -502,7 +513,7 @@ def checkOut(user):
         return
     total = view_cart(user)
     print("\n\nC H E C K - O U T ", "_"*42)
-    print("\n\tBalance: ₱{:,.2f}".format(user[4]))
+    print("\n\tBalance: P{:,.2f}".format(user[4]))
     print("\n\tDo you want to Check-Out? [Y/N]")
     choice = input().lower()
     if choice == "n":
@@ -585,7 +596,8 @@ def main():
                 if choice == '1':
                     os.system('cls')
                     listProd()
-                    sleep(3)
+                    input("\t\t\tpress enter to continue")
+                    sleep(1)
                 elif choice == '2':
                     Add_product()
                     sleep(3)
@@ -594,13 +606,15 @@ def main():
                     sleep(2)
                 elif choice == '4':
                     update_product()
-                    sleep(3)
+                    sleep(2)
                 elif choice == '5':
                     findProd()
-                    sleep(3)
+                    input("\t\t\tpress enter to continue")
+                    sleep(1)
                 elif choice == '6':
                     listSales()
-                    sleep(3)
+                    input("\t\t\tpress enter to continue")
+                    sleep(1)
                 elif choice == '7':
                     print("\n\n\t\t\t\t\t\tLogging out...")
                     break
@@ -617,47 +631,54 @@ def main():
                 if choice == '1':
                     os.system('cls')
                     listProd()
-                    sleep(3)
+                    input("\t\t\tpress enter to continue")
+                    sleep(1)
                 elif choice == '2':
                     findProd()
                     sleep(1)
                 elif choice == '3':
                     view_cart(admin_or_user)
-                    sleep(3)
+                    input("\t\t\tpress enter to continue")
+                    sleep(1)
                 elif choice == '4':
                     add_to_cart(admin_or_user)
-                    sleep(2)
+                    input("\t\t\tpress enter to continue")
+                    sleep(1)
                 elif choice == '5':
                     delete_cart(admin_or_user)
-                    sleep(2)
+                    input("\t\t\tpress enter to continue")
+                    sleep(1)
                 elif choice == '6':
                     checkOut(admin_or_user)
-                    sleep(5)
+                    input("\t\t\tpress enter to continue")
+                    sleep(2)
                 elif choice == '7':
                     view_orders(admin_or_user)
+                    input("\t\t\tpress enter to continue")
                     sleep(2)
                 elif choice == '8':
                     try:
                         os.system('cls')
                         print(
                             "\n\n\t     _________ \n\t    / ======= \ \n\t   / __________\ \n\t  | ___________ |\n\t  | | -       | |"
-                            "\n\t  | |         | | ", "B A L A N C E: ₱{:,.2f}".format(admin_or_user[4]), "\n\t  | |_________| |", "_" * 50,
+                            "\n\t  | |         | | ", "B A L A N C E: P{:,.2f}".format(admin_or_user[4]), "\n\t  | |_________| |", "_" * 50,
                             "\n\t  \=____________/", " " * 49, ")", "\n\t  / ::::::::::: \ ", " " * 47, "/",
                             "\n\t / ::::::::::::: \ ", " " * 42, "=D-'", "\n\t(_________________)")
                         print("\n\tC A S H - I N", "_" * 32)
-                        val = input("\n\tEnter amount: ₱ ")
+                        val = input("\n\tEnter amount: P ")
                         admin_or_user[4] += int(val)
                     except:
                         print("invalid input")
-                        sleep(1)
+                    sleep(1)
                 elif choice == '9':
                     os.system('cls')
                     print("\n\n\t     _________ \n\t    / ======= \ \n\t   / __________\ \n\t  | ___________ |\n\t  | | -       | |"
-                        "\n\t  | |         | | ", "B A L A N C E: ₱{:,.2f}".format(admin_or_user[4]), "\n\t  | |_________| |", "_"*50,
+                        "\n\t  | |         | | ", "B A L A N C E: P{:,.2f}".format(admin_or_user[4]), "\n\t  | |_________| |", "_"*50,
                         "\n\t  \=____________/", " "*49, ")", "\n\t  / ::::::::::: \ ", " "*47, "/",
                         "\n\t / ::::::::::::: \ ", " " * 42, "=D-'", "\n\t(_________________)")
-                    # print("Balance: ₱{:,.2f}".format(admin_or_user[4]))
-                    sleep(5)
+                    # print("Balance: P{:,.2f}".format(admin_or_user[4]))
+                    input("\t\t\tpress enter to continue")
+                    sleep(1)
                 elif choice == '0':
                     print("\n\n\t\t\t\t\t\tLogging out...")
                     sleep(1)
