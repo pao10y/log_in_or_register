@@ -69,23 +69,17 @@ def log_in():
         print("\n", "\t" * 5, "_" * 45)
         username = input("\n\n\t\t\t\t\t\tEnter username: ")
         password = input("\t\t\t\t\t\tEnter password: ")
-        for i in registered_users:
-            if username.lower() == i[0].lower():
-                username = i[0]
-        for i in admin_users:
-            if username.lower() == i[0].lower():
-                username = i[0]
+        username = username.lower()
         credentials = [username, password]
 
         if credentials in admin_users:
-            print("\n\n\t\t\t\t\t\tAdmin User: {}".format(username))
+            print("\n\n\t\t\t\t\t\tAdmin User: {}".format(username.capitalize()))
             return 1
         else:
-            valid = 0
             for i in registered_users:
                 if i[0] == username:
                     if i[1] == password:
-                        print("\n\t\t\t\t\t\tRegistered User: {}".format(username))
+                        print("\n\t\t\t\t\t\tRegistered User: {}".format(username.capitalize()))
                         return i
             return
 
@@ -107,7 +101,7 @@ def register():  # admin registers are closed, no outside user can be an admin
     r_repassword = input("\t\t\t\t\t\tRe-enter password: ")
     if r_password == r_repassword:
         # more information details can be implemented if necessary
-
+        r_username = r_username.lower()
         r_credentials = [r_username, r_password, [], [], 0]
 
         registered_users.append(r_credentials)
