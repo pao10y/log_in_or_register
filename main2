@@ -462,7 +462,6 @@ def view_cart(user):
 
 
 def delete_cart(user):
-    verify = 0
     os.system('cls')
     print("\n\n", "_" * 10, "./", "\n", "#" * 10, "\n", "#" * 10, "\tD E L E T E  FROM  C A R T", "\n", " _________\ ", "\n",
           "(o)     " * 2)
