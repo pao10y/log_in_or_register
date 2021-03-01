@@ -406,20 +406,6 @@ def findProd():
                 break
 
 
-# SALES HISTORY
-def sales_history():
-    os.system('cls')
-    total_sales = 0
-    print("\nSales History \n")
-    for idx, item in enumerate(bought):
-        print(
-            "\tItem {}: \n\t\tItem Name: {} \n\t\tProductID: {} \n\t\tCategory: {} \n\t\tQuantity: {} \n\t\tUnit Price: P{:,.2f} \n\t\tTotal Price: P{:,.2f}  ".format(
-                idx + 1, item[0], item[3], item[4], item[1], item[2], item[2] * item[1]))
-        total_sales = total_sales + (item[1] * item[2])
-    print("\n\tTOTAL SALES: ", total_sales)
-    print("\n\n\t\t\t<---- Returning home")
-    return
-
 
 # ---------------------------------------USER FUNCTIONS--------------------------------------------
 # Add to cart Function
