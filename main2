@@ -165,19 +165,19 @@ def Add_product():
 
     os.system('cls')
     listProd()
-    print("\n\tADDITION OF NEW PRODUCT")
+    print("\n\t\t\tADDITION OF NEW PRODUCT")
     while True:
         try:
-            n = input("\n\tEnter name of product: ")
-            c = input("\tEnter category: ")
-            s = int(input("\tEnter stocks: "))
-            p = int(input("\tEnter price: "))
-            print("\n", "_"*90, "\n\n\tNEW PRODUCT DETAILS")
-            print("\n\tItem: ", n)
-            print("\tCategory: ", c)
-            print("\tStock: ", s)
-            print("\tPrice: ", p)
-            resp = input("\n\tDo you want to add this item? [Y/N]:  ")
+            n = input("\n\t\t\tEnter name of product: ")
+            c = input("\t\t\tEnter category: ")
+            s = int(input("\t\t\tEnter stocks: "))
+            p = int(input("\t\t\tEnter price: "))
+            print("\n\t\t\t", "_"*90, "\n\n\t\t\tNEW PRODUCT DETAILS")
+            print("\n\t\t\tItem: ", n)
+            print("\t\t\tCategory: ", c)
+            print("\t\t\tStock: ", s)
+            print("\t\t\tPrice: ", p)
+            resp = input("\n\t\t\tDo you want to add this item? [Y/N]:  ")
             if resp.lower() == "y":
                 id = "S" + str(idIncrement[0]).zfill(4)
                 idIncrement[0] += 1
@@ -185,22 +185,22 @@ def Add_product():
                 sales.append([id, n, c, 0, p])
                 os.system('cls')
                 listProd()
-                print("\tAddition success!")
+                print("\t\t\tAddition success!")
             elif resp.lower() == "n":
-                print("\tAddition cancelled!")
+                print("\t\t\tAddition cancelled!")
             else:
-                print("\tinvalid input")
-            resp = input("\n\tDo you want to add another item? [Y/N]:  ")
-            print("_"*90)
+                print("\t\t\tinvalid input")
+            resp = input("\n\t\t\tDo you want to add another item? [Y/N]:  ")
+            print("\t\t\t", "_"*90)
             if resp.lower() == "y":
                 continue
             elif resp.lower() == "n":
                 break
             else:
-                print("\t\tInvalid input, defaulting to N")
+                print("\t\t\t\tInvalid input, defaulting to N")
                 break
         except:
-            print("\t\tSomething went wrong, please try again")
+            print("\n\t\t\tSomething went wrong, please try again")
             continue
 
 
@@ -211,11 +211,11 @@ def delete_product():
 
     os.system('cls')
     listProd()
-    print("\n\tDELETION OF PRODUCT")
+    print("\n\t\t\tDELETION OF PRODUCT")
     while True:
         if len(products) == 1:
-            print("\tNo products to delete")
-        prodDel = input("\n\tEnter Product ID: ")
+            print("\t\t\tNo products to delete")
+        prodDel = input("\n\t\t\tEnter Product ID: ")
         for item in products:
             if prodDel.lower() == item[0].lower():
                 products.remove(item)
@@ -223,20 +223,20 @@ def delete_product():
         if verify == 1:
             os.system('cls')
             listProd()
-            print("\tProduct deleted...")
+            print("\t\t\tProduct deleted...")
             verify = 0
         else:
-            print("\tProduct not found...")
+            print("\t\t\tProduct not found...")
 
-        resp = input("\n\tDelete another product [Y/N]: ")
-        print("_" * 90)
+        resp = input("\n\t\t\tDelete another product [Y/N]: ")
+        print("\t\t\t", "_" * 90)
         if resp.lower() == "y":
             continue
         elif resp.lower() == "n":
             break
         else:
-            print("\tInvalid choice, defaulting to N")
-            print("\n\n\t<---- Returning home")
+            print("\t\t\tInvalid choice, defaulting to N")
+            print("\n\n\t\t\t<---- Returning home")
             break
 
 
@@ -247,25 +247,25 @@ def update_product():
 
     os.system('cls')
     listProd()
-    print("\n\tUPDATING A PRODUCT")
+    print("\n\t\t\tUPDATING A PRODUCT")
     while True:
         try:
-            loc = input("\n\tEnter Product ID: ")
-            print("\n", "_" * 90)
-            print("\n\tUPDATE TYPES")
-            print("\n\t[1] Full Edit \t\t [4] Edit Stock")
-            print("\t[2] Edit Name \t\t [5] Edit Price")
-            print("\t[3] Edit Category")
-            choice = input("\n\tEnter Update Type: ")
+            loc = input("\n\t\t\tEnter Product ID: ")
+            print("\n\t\t\t", "_" * 90)
+            print("\n\t\t\tUPDATE TYPES")
+            print("\n\t\t\t[1] Full Edit \t\t [4] Edit Stock")
+            print("\t\t\t[2] Edit Name \t\t [5] Edit Price")
+            print("\t\t\t[3] Edit Category")
+            choice = input("\n\t\t\tEnter Update Type: ")
             if choice == "1":
                 for i in products:
                     if i[0].lower() == loc.lower():
-                        print("_" * 90)
-                        print("\n\tUpdating Product: ", i)
-                        a = input("\tEnter Product Name: ")
-                        b = input("\tEnter Category: ")
-                        c = int(input("\tEnter Stocks: "))
-                        d = int(input("\tEnter Price: "))
+                        print("\n\t\t\t", "_" * 90)
+                        print("\n\t\t\tUpdating Product: ", i)
+                        a = input("\t\t\tEnter Product Name: ")
+                        b = input("\t\t\tEnter Category: ")
+                        c = int(input("\t\t\tEnter Stocks: "))
+                        d = int(input("\t\t\tEnter Price: "))
                         i[1] = a
                         i[2] = b
                         i[3] = c
@@ -282,10 +282,10 @@ def update_product():
             elif choice == "2":
                 for i in products:
                     if i[0].lower() == loc.lower():
-                        print("\n", "_" * 90)
-                        print("\n\tUpdating Product: ", i)
+                        print("\n\t\t", "_" * 90)
+                        print("\n\t\t\tUpdating Product: ", i)
                         x = i[0]
-                        a = input("\tEnter Product Name: ")
+                        a = input("\t\t\tEnter Product Name: ")
                         i[1] = a
                         verify = 1
                         break
@@ -296,10 +296,10 @@ def update_product():
             elif choice == "3":
                 for i in products:
                     if i[0].lower() == loc.lower():
-                        print("\n", "_" * 90)
-                        print("\n\tUpdating Product: ", i)
+                        print("\n\t", "_" * 90)
+                        print("\n\t\t\tUpdating Product: ", i)
                         x = i[0]
-                        b = input("\tEnter Category: ")
+                        b = input("\t\t\tEnter Category: ")
                         i[2] = b
                         verify = 1
                         break
@@ -311,9 +311,9 @@ def update_product():
                 for i in products:
                     if i[0].lower() == loc.lower():
                         print("\n", "_" * 90)
-                        print("\n\tUpdating Product: ", i)
+                        print("\n\t\t\tUpdating Product: ", i)
                         x = i[0]
-                        c = int(input("\tEnter Stocks: "))
+                        c = int(input("\t\t\tEnter Stocks: "))
                         i[3] = c
                         verify = 1
                         break
@@ -321,9 +321,9 @@ def update_product():
                 for i in products:
                     if i[0].lower() == loc.lower():
                         print("\n", "_" * 90)
-                        print("\n\tUpdating Product: ", i)
+                        print("\n\t\t\tUpdating Product: ", i)
                         x = i[0]
-                        d = int(input("\tEnter Price: "))
+                        d = int(input("\t\t\tEnter Price: "))
                         i[4] = d
                         verify = 1
                         break
@@ -336,21 +336,21 @@ def update_product():
             if verify == 1:
                 os.system('cls')
                 listProd()  # print list function
-                print("\tProduct Updated...")
+                print("\t\t\tProduct Updated...")
                 verify = 0
             else:
-                print("\tProduct Not Found...")
+                print("\t\t\tProduct Not Found...")
         except:
-            print("\tSomething went wrong, invalid input")
-        resp = input("\n\tUpdate Another Product [Y/N]: ")
-        print("_" * 90)
+            print("\n\t\t\tSomething went wrong, invalid input")
+        resp = input("\n\t\t\tUpdate Another Product [Y/N]: ")
+        print("\t\t\t", "_" * 90)
         if resp.lower() == "y":
             continue
         elif resp.lower() == "n":
-            print("\n\n\t<---- Returning home")
+            print("\n\n\t\t\t<---- Returning home")
             break
         else:
-            print("\tInvalid Choice, Defaulting to N\n\n\t<---- Returning home")
+            print("\t\t\tInvalid Choice, Defaulting to N\n\n\t<---- Returning home")
             break
 
 
@@ -358,17 +358,18 @@ def update_product():
 def findProd():
     f = 0
     os.system('cls')
-    print("\n\tSEARCH A PRODUCT")
-    print("\n", "_" * 90)
+    print("\n\t\t\tSEARCH A PRODUCT")
+    print("\n\t\t\t", "_" * 90)
     while f < 1:
-        name = input("\n\tPlease enter item name:")
-        print("\n", "_" * 90, "\n")
+        name = input("\n\t\t\tEnter item name:")
+        print("\n\t\t\t", "_" * 90, "\n")
         verify = 0
         l = [0, 0, 0, 0, 0]
         for lists in products:
             for i in range(5):
                 if l[i] < len(str(lists[i])):
                     l[i] = len(str(lists[i]))
+        print('\t\t\t', end="")
         for item in products:
             if item == products[0] or name.lower() in item[1].lower():
                 for i in range(5):
@@ -378,28 +379,30 @@ def findProd():
                     else:
                         print(item[i], end=(" " * ((l[i] + 5) - len(str(item[i])))))
                 print()
+                print('\t\t\t', end="")
         if verify == 1:
-            d = input("\n\n\tSearch for another item?[Y/N]")
             print("_" * 90)
+            d = input("\n\n\t\t\tSearch for another item? [Y/N]: ")
+            print("\t\t\t", "_" * 90)
             if (d == 'Y' or d == 'y'):
                 continue
             elif (d == 'N' or d == 'n'):
-                print("\n\n\t<---- Returning home")
+                print("\n\n\t\t\t<---- Returning home")
                 break
             else:
-                print("Invalid, Default to N\n\n\t<---- Returning home")
+                print("Invalid, Default to N\n\n\t\t\t<---- Returning home")
                 break
         else:
-            print("\n\nNo item found with {}".format(name))
-            d = input("\n\n\tSearch for another item?[Y/N]")
-            print("_" * 90)
+            print("\n\n\t\t\tNo item found with {}".format(name))
+            d = input("\n\n\t\t\tSearch for another item?[Y/N]: ")
+            print("\t\t\t", "_" * 90)
             if (d == 'Y' or d == 'y'):
                 continue
             elif (d == 'N' or d == 'n'):
-                print("\n\n\t<---- Returning home")
+                print("\n\n\t\t\t<---- Returning home")
                 break
             else:
-                print("Invalid, Default to N\n\n\t<---- Returning home")
+                print("\t\t\tInvalid, Default to N\n\n\t<---- Returning home")
                 break
 
 
@@ -414,7 +417,7 @@ def sales_history():
                 idx + 1, item[0], item[3], item[4], item[1], item[2], item[2] * item[1]))
         total_sales = total_sales + (item[1] * item[2])
     print("\n\tTOTAL SALES: ", total_sales)
-    print("\n\n\t<---- Returning home")
+    print("\n\n\t\t\t<---- Returning home")
     return
 
 
@@ -422,21 +425,22 @@ def sales_history():
 # Add to cart Function
 def add_to_cart(user):
     os.system('cls')
-    print("\n\n","_" * 10, "./", "\n", "#" * 10, "\n", "#" * 10, "\tA D D  TO  C A R T", "\n", " _________\ ", "\n", "(o)     " * 2)
+    print("\n\n\t\t\t","_" * 10, "./", "\n\t\t\t", "#" * 10, "\n\t\t\t", "#" * 10, "\tA D D  TO  C A R T", "\n\t\t\t",
+          " _________\ ", "\n\t\t\t", "(o)     " * 2)
     listProd()
     while True:
-        input_item = input("\n\tEnter a valid product ID: ")
+        input_item = input("\n\t\t\tEnter a valid product ID: ")
         for idx, item in enumerate(products):
             if input_item.upper() == products[idx][0]:
-                input_itemno = int(input("\n\tEnter product quantity: "))
+                input_itemno = int(input("\n\t\t\tEnter product quantity: "))
                 if input_itemno <= products[idx][3]:
                     products[idx][3] = products[idx][3] - input_itemno
                     newcart = [products[idx][0], products[idx][1], input_itemno]
                     user[2].append(newcart)
-                    print("\n\t{} {} successfully added to cart! \n\n\n\t<----Returning home".format(input_itemno, products[idx][2]))
+                    print("\n\t\t\t{} {} successfully added to cart! \n\n\n\t<----Returning home".format(input_itemno, products[idx][2]))
                     return
-        print("\n\tInvalid input. Please try again")
-        print("\n\n\t<---- Returning home")
+        print("\n\t\t\t\tInvalid input. Please try again")
+        print("\n\n\t\t\t\t\t<---- Returning home")
         return
 
 
@@ -468,7 +472,7 @@ def delete_cart(user):
             break
         view_cart(user)
         try:
-            print("\nD E L E T E  FROM  C A R T ", "_" * 12)
+            print("\nD E L E T E  FROM  C A R T ", "_" * 20)
             itemdel = int(input("\n\tEnter Item Number(0 to exit): "))
             if itemdel == 0:
                 print("\n\n\t<---- Returning home")
@@ -505,7 +509,7 @@ def checkOut(user):
         print("\n\n", "/\\" * 25)
         return
     total = view_cart(user)
-    print("\n\nC H E C K - O U T ", "_"*42)
+    print("\n\nC H E C K - O U T ", "_"*32)
     print("\n\tBalance: P{:,.2f}".format(user[4]))
     print("\n\tDo you want to Check-Out? [Y/N]")
     choice = input().lower()
@@ -522,7 +526,7 @@ def checkOut(user):
         idIncrement[1] += 1
         user[2].clear()
         user[4] -= total
-        print("\n\tProducts successfully purchased, please check your orders to verify. \n\tYour receipt is {}".format(receipt))
+        print("\n\tProducts successfully purchased, please check your orders to verify. \n\tYour receipt is {}\n".format(receipt))
         return
     else:
         print("\n\tInsufficient cash!")
@@ -534,10 +538,10 @@ def view_orders(user):
     incr = 1
     print("\n\n", "/\\" * 25, "\n")
     if len(user[3]) == 0:
-        print("You have no orders to display")
+        print("\tYou have no orders to display")
     for idx, item in enumerate(user[3]):
         if type(item) == str:
-            print("Receipt for above items: {}\n".format(item))
+            print("\tReceipt for above items: {}\n".format(item))
             incr = 1
         else:
             print("\tItem {}: {} {}".format(incr, item[2], item[1]))
@@ -590,7 +594,7 @@ def main():
                     sleep(1)
                 elif choice == '2':
                     Add_product()
-                    sleep(3)
+                    sleep(2)
                 elif choice == '3':
                     delete_product()
                     sleep(2)
@@ -602,7 +606,7 @@ def main():
                     sleep(1)
                 elif choice == '6':
                     listSales()
-                    input("\t\t\tpress enter to continue")
+                    input("\t\t\tpress enter to continue...")
                     sleep(1)
                 elif choice == '7':
                     print("\n\n\t\t\t\t\t\tLogging out...")
@@ -620,14 +624,14 @@ def main():
                 if choice == '1':
                     os.system('cls')
                     listProd()
-                    input("\t\t\tpress enter to continue")
+                    input("\t\t\tpress enter to continue...")
                     sleep(1)
                 elif choice == '2':
                     findProd()
                     sleep(1)
                 elif choice == '3':
                     view_cart(admin_or_user)
-                    input("\t\t\tpress enter to continue")
+                    input("\tpress enter to continue...")
                     sleep(1)
                 elif choice == '4':
                     add_to_cart(admin_or_user)
@@ -637,11 +641,11 @@ def main():
                     sleep(1)
                 elif choice == '6':
                     checkOut(admin_or_user)
-                    input("\t\t\tpress enter to continue")
+                    input("\tpress enter to continue...")
                     sleep(2)
                 elif choice == '7':
                     view_orders(admin_or_user)
-                    input("\t\t\tpress enter to continue")
+                    input("\tpress enter to continue...")
                     sleep(2)
                 elif choice == '8':
                     try:
@@ -655,7 +659,7 @@ def main():
                         val = input("\n\tEnter amount: P ")
                         admin_or_user[4] += int(val)
                     except:
-                        print("invalid input")
+                        print("\n\tInvalid input")
                     sleep(1)
                 elif choice == '9':
                     os.system('cls')
@@ -664,7 +668,7 @@ def main():
                         "\n\t  \=____________/", " "*49, ")", "\n\t  / ::::::::::: \ ", " "*47, "/",
                         "\n\t / ::::::::::::: \ ", " " * 42, "=D-'", "\n\t(_________________)")
                     # print("Balance: P{:,.2f}".format(admin_or_user[4]))
-                    input("\n\t\t\tpress enter to continue")
+                    input("\n\t\t\t    press enter to continue...")
                     sleep(1)
                 elif choice == '0':
                     print("\n\n\t\t\t\t\t\tLogging out...")
