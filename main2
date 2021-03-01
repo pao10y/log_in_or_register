@@ -188,8 +188,10 @@ def Add_product():
                 print("\t\t\tAddition success!")
             elif resp.lower() == "n":
                 print("\t\t\tAddition cancelled!")
+                break
             else:
                 print("\t\t\tinvalid input")
+                break
             resp = input("\n\t\t\tDo you want to add another item? [Y/N]:  ")
             print("\t\t\t", "_"*90)
             if resp.lower() == "y":
