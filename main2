@@ -514,21 +514,24 @@ def checkOut(user):
     choice = input().lower()
     if choice == "n":
         return
-    if total <= user[4]:
-        for idx, item in enumerate(user[2]):
-            user[3].append(item)
-            for i in sales:
-                if item[0] == i[0]:
-                    i[3] += item[2]
-        receipt = "#" + str(idIncrement[1]).zfill(6)
-        user[3].append(receipt)
-        idIncrement[1] += 1
-        user[2].clear()
-        user[4] -= total
-        print("\n\tProducts successfully purchased, please check your orders to verify. \n\tYour receipt is {}\n".format(receipt))
-        return
+    elif choice == "y":
+        if total <= user[4]:
+            for idx, item in enumerate(user[2]):
+                user[3].append(item)
+                for i in sales:
+                    if item[0] == i[0]:
+                        i[3] += item[2]
+            receipt = "#" + str(idIncrement[1]).zfill(6)
+            user[3].append(receipt)
+            idIncrement[1] += 1
+            user[2].clear()
+            user[4] -= total
+            print("\n\tProducts successfully purchased, please check your orders to verify. \n\tYour receipt is {}\n".format(receipt))
+            return
+        else:
+            print("\n\tInsufficient cash!")
     else:
-        print("\n\tInsufficient cash!")
+        print("Invalid Input, Returning")
 
 
 def view_orders(user):
