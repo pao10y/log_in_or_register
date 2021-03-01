@@ -531,7 +531,7 @@ def checkOut(user):
         else:
             print("\n\tInsufficient cash!")
     else:
-        print("Invalid Input, Returning")
+        print("Invalid Input")
 
 
 def view_orders(user):
