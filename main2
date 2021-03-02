@@ -134,6 +134,7 @@ def listProd():
 
 # SHOW SALES FUNCTION
 def listSales():
+    os.system('cls')
     l = [0, 0, 0, 0, 0]
 
     for lists in sales:
