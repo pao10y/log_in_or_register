@@ -69,18 +69,17 @@ def log_in():
         print("\n", "\t" * 5, "_" * 45)
         username = input("\n\n\t\t\t\t\t\tEnter username: ")
         password = input("\t\t\t\t\t\tEnter password: ")
-        username = username.lower()
-        credentials = [username, password]
 
-        if credentials in admin_users:
-            print("\n\n\t\t\t\t\t\tAdmin User: {}".format(username.capitalize()))
-            return 1
-        else:
-            for i in registered_users:
-                if i[0] == username:
+        for i in admin_users:
+                if i[0].lower() == username.lower():
                     if i[1] == password:
-                        print("\n\t\t\t\t\t\tRegistered User: {}".format(username.capitalize()))
-                        return i
+                        print("\n\t\t\t\t\t\tAdmin User: {}".format(i[0]))
+                        return 1
+        for i in registered_users:
+            if i[0] == username:
+                if i[1] == password:
+                    print("\n\t\t\t\t\t\tRegistered User: {}".format(i[0]))
+                    return i
             return
 
 
@@ -246,13 +245,20 @@ def delete_product():
 def update_product():
     verify = 0
     resp = "y"
-
+    
     os.system('cls')
     listProd()
     print("\n\t\t\tUPDATING A PRODUCT")
     while True:
         try:
             loc = input("\n\t\t\tEnter Product ID: ")
+            ver = 0
+            for i in products:
+                if loc.lower() == i[0].lower():
+                    ver = 1
+                    break
+            if ver==0:
+                int('x')
             print("\n\t\t\t", "_" * 90)
             print("\n\t\t\tUPDATE TYPES")
             print("\n\t\t\t[1] Full Edit \t\t [4] Edit Stock")
